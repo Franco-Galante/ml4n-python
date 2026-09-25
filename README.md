@@ -17,9 +17,9 @@ More lectures are added as the course goes on.
 
 **How to use the viewer**
 
+- **Click a line number to jump there!**<br><img src="docs/images/line_number.svg" alt="Clicking a line number in the viewer" width="230">
 - `→` / `←`: next / previous step. `Shift + →`: step *over* a function call.
-- `Shift + E`: show or hide the variable panel.
-- Click a line number to jump there.
+- You don't have to go step by step with the arrows: scroll the page and click the line number of any line to jump straight there.
 - The page stays blank? Reload it: it is a known, harmless glitch.
 
 ## Labs
