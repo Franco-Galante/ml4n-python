@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 860 296" width="860" height="296" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8494a8"/>
+    </marker>
+    <style>
+      .card  { fill: #ffffff; stroke: #dbe4ee; stroke-width: 1.5; }
+      .live  { fill: #eaf2fb; stroke: #2563eb; stroke-width: 1.5; }
+      .name  { font-size: 13px; fill: #1f3550; font-weight: 600; }
+      .code  { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; fill: #1f3550; }
+      .op    { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10.5px; fill: #1b4b91; }
+      .role  { font-size: 11.5px; fill: #5b6b7f; }
+      .link  { stroke: #8494a8; stroke-width: 1.4; fill: none; }
+      .note  { font-size: 14px; fill: #1f3550; }
+      .mono  { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .bold  { font-weight: 700; }    </style>
+  </defs>
+
+  <!-- source -->
+  <rect class="card" x="16" y="30" width="200" height="140" rx="12"/>
+  <text class="name" x="32" y="56">Python code (.py)</text>
+  <line x1="32" y1="66" x2="200" y2="66" stroke="#dbe4ee"/>
+  <text class="code" x="32" y="92">l = []</text>
+  <text class="code" x="32" y="112">for i in range(0,10):</text>
+  <text class="code" x="32" y="132">    l.append(i)</text>
+
+  <path class="link" d="M 216 100 H 256" marker-end="url(#arrow)"/>
+
+  <!-- translator -->
+  <rect class="live" x="260" y="55" width="170" height="90" rx="12"/>
+  <text class="name" x="345" y="95" text-anchor="middle">Syntax checker</text>
+  <text class="name" x="345" y="115" text-anchor="middle">and translator</text>
+
+  <path class="link" d="M 430 100 H 470" marker-end="url(#arrow)"/>
+
+  <!-- bytecode -->
+  <rect class="card" x="474" y="30" width="170" height="140" rx="12"/>
+  <text class="name" x="490" y="56">Bytecode (.pyc)</text>
+  <line x1="490" y1="66" x2="628" y2="66" stroke="#dbe4ee"/>
+  <text class="op" x="490" y="88">BUILD_LIST</text>
+  <text class="op" x="490" y="104">STORE_NAME   l</text>
+  <text class="op" x="490" y="120">LOAD_NAME    range</text>
+  <text class="op" x="490" y="136">GET_ITER</text>
+  <text class="op" x="490" y="152">FOR_ITER     …</text>
+
+  <path class="link" d="M 644 100 H 684" marker-end="url(#arrow)"/>
+
+  <!-- virtual machine -->
+  <rect class="live" x="688" y="55" width="156" height="90" rx="12"/>
+  <text class="name" x="766" y="95" text-anchor="middle">Python Virtual</text>
+  <text class="name" x="766" y="115" text-anchor="middle">Machine (PVM)</text>
+
+  <line x1="16" y1="196" x2="844" y2="196" stroke="#dbe4ee" stroke-width="1"/>
+  <text class="note" x="16" y="224">Two steps, both done by the <tspan class="mono">python</tspan> program you install (<tspan class="bold">CPython</tspan>):</text>
+  <text class="note" x="36" y="250"><tspan class="bold">1. Translation</tspan>: its (bytecode) compiler checks the syntax and translates the source code into <tspan class="bold">bytecode</tspan>.</text>
+  <text class="note" x="36" y="276"><tspan class="bold">2. Execution</tspan>: its interpreter, the <tspan class="bold">Python Virtual Machine</tspan>, runs the bytecode one instruction at a time.</text>
+</svg>

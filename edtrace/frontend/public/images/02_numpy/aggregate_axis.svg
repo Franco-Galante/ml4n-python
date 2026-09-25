@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 346" width="560" height="346" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"><defs>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f3550"/></marker>
+  <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/></marker>
+  <style>
+.cell { fill: #ffffff; stroke: #9db7d4; stroke-width: 1.1; }
+.hl   { fill: #fdf0cf; stroke: #e0a500; stroke-width: 1.4; }
+.br   { fill: #e3edfb; stroke: #9db7d4; stroke-width: 1.1; }
+.dim  { fill: #f5f9fd; stroke: #9db7d4; stroke-width: 1.1; }
+.box  { fill: #ffffff; stroke: #2563eb; stroke-width: 1.3; }
+.head { fill: #eaf2fb; stroke: #2563eb; stroke-width: 1.3; }
+.val  { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13.5px; fill: #1f3550; text-anchor: middle; dominant-baseline: central; }
+.idx  { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10px; fill: #2563eb; text-anchor: middle; dominant-baseline: central; }
+.lbl  { font-size: 13px; fill: #5b6b7f; text-anchor: middle; }
+.tag  { font-size: 13px; fill: #5b6b7f; }
+.code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; fill: #1b4b91; font-weight: 600; }
+.codec { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; fill: #1b4b91; font-weight: 600; text-anchor: middle; }
+.neg  { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; fill: #c2185b; text-anchor: middle; }
+.op   { font-size: 20px; fill: #1f3550; text-anchor: middle; dominant-baseline: central; }
+.axis { stroke: #1f3550; stroke-width: 1.2; fill: none; }
+.flow { stroke: #2563eb; stroke-width: 1.6; fill: none; }
+.cut  { stroke: #c2185b; stroke-width: 2.2; fill: none; }
+.thin { stroke: #9db7d4; stroke-width: 1; fill: none; }
+</style>
+</defs><text class="code" x="20" y="24">x = np.array([[1, 7], [2, 4]])</text><text class="code" x="20" y="60">x.sum(axis=1)   # or axis=-1</text><rect class="cell" x="40" y="74" width="40" height="30"/><text class="val" style="font-size:13.5px" x="60.0" y="89.0">1</text><rect class="cell" x="80" y="74" width="40" height="30"/><text class="val" style="font-size:13.5px" x="100.0" y="89.0">7</text><rect class="cell" x="40" y="104" width="40" height="30"/><text class="val" style="font-size:13.5px" x="60.0" y="119.0">2</text><rect class="cell" x="80" y="104" width="40" height="30"/><text class="val" style="font-size:13.5px" x="100.0" y="119.0">4</text><path class="flow" d="M 128 89 L 170 89" marker-end="url(#b)"/><path class="flow" d="M 128 119 L 170 119" marker-end="url(#b)"/><rect class="hl" x="180" y="74" width="40" height="30"/><text class="val" style="font-size:13.5px" x="200.0" y="89.0">8</text><rect class="hl" x="180" y="104" width="40" height="30"/><text class="val" style="font-size:13.5px" x="200.0" y="119.0">6</text><text class="tag" x="246" y="94">sum the elements of each row</text><text class="code" x="246" y="116">-> array([8, 6]), shape (2,)</text><text class="code" x="20" y="178">x.argmax(axis=0)</text><rect class="cell" x="40" y="192" width="40" height="30"/><text class="val" style="font-size:13.5px" x="60.0" y="207.0">1</text><rect class="cell" x="80" y="192" width="40" height="30"/><text class="val" style="font-size:13.5px" x="100.0" y="207.0">7</text><rect class="cell" x="40" y="222" width="40" height="30"/><text class="val" style="font-size:13.5px" x="60.0" y="237.0">2</text><rect class="cell" x="80" y="222" width="40" height="30"/><text class="val" style="font-size:13.5px" x="100.0" y="237.0">4</text><path class="flow" d="M 60 258 L 60 292" marker-end="url(#b)"/><path class="flow" d="M 100 258 L 100 292" marker-end="url(#b)"/><rect class="hl" x="40" y="300" width="40" height="30"/><text class="val" style="font-size:13.5px" x="60.0" y="315.0">1</text><rect class="hl" x="80" y="300" width="40" height="30"/><text class="val" style="font-size:13.5px" x="100.0" y="315.0">0</text><text class="tag" x="246" y="212">index of the largest element of each column</text><text class="code" x="246" y="234">-> array([1, 0]), shape (2,)</text></svg>

@@ -1,0 +1,84 @@
+# Publish the lectures on GitHub Pages: https://<owner>.github.io/<repo>/?trace=<lecture>
+#
+# On every push to main: execute every lecture at the root of the repo (the
+# NN_*.py files), build the edtrace viewer, and publish it with the traces and
+# the images. Nothing built is committed: the site lives only on Pages.
+# One-time setting on GitHub: Settings -> Pages -> Source: GitHub Actions.
+
+name: Publish lectures
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+          cache-dependency-path: edtrace/frontend/package-lock.json
+
+      - name: Install the Python environment
+        run: uv sync --locked
+
+      - name: Execute the lectures
+        run: uv run python tools/prepare_lecture.py $(ls [0-9][0-9]_*.py | sed 's/\.py$//')
+
+      - name: Install the viewer
+        run: npm ci --prefix edtrace/frontend
+
+      - name: Build the viewer
+        env:
+          NODE_ENV: production
+          VITE_EDTRACE_BASE_DIR: /${{ github.event.repository.name }}
+          VITE_EDTRACE_DIST_DIR: ${{ github.workspace }}/_site
+        run: npm run --prefix edtrace/frontend build
+
+      # The build copies the viewer's public/ folder, where var/ and images/ are
+      # symlinks: replace them with real copies of the traces and images only.
+      # When you step, the viewer rewrites the address to /<repo>?trace=... (no
+      # trailing slash), so relative image paths would resolve against the site
+      # root: a <base> tag pins them to the repo folder.
+      - name: Add the traces and the images
+        run: |
+          rm -rf _site/var _site/images
+          mkdir -p _site/var
+          cp -r var/traces _site/var/traces
+          cp -r images _site/images
+          sed -i 's#<head>#<head>\n    <base href="/${{ github.event.repository.name }}/" />#' _site/index.html
+          touch _site/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,4 @@
+[submodule "edtrace"]
+	path = edtrace
+	url = https://github.com/percyliang/edtrace.git
+	ignore = dirty

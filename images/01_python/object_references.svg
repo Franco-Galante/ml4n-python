@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 68 560 182" width="560" height="182" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    </marker>
+    <style>
+      .ref   { fill: #f5f9fd; stroke: #dbe4ee; stroke-width: 1.2; }
+      .obj   { fill: #ffffff; stroke: #2563eb; stroke-width: 1.5; }
+      .head  { fill: #eaf2fb; }
+      .var   { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 15px; fill: #1f3550; font-weight: 700; }
+      .field { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; fill: #1f3550; }
+      .code  { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; fill: #1b4b91; font-weight: 600; }
+      .mono  { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1b4b91; }
+      .label { font-size: 12px; fill: #5b6b7f; }
+      .link  { stroke: #2563eb; stroke-width: 1.5; fill: none; }
+    </style>
+  </defs>
+
+  <text class="label" x="68" y="84" text-anchor="middle">variables (references)</text>
+  <rect class="ref" x="40" y="104" width="56" height="36" rx="6"/>
+  <text class="var" x="68" y="127" text-anchor="middle">x</text>
+  <rect class="ref" x="40" y="178" width="56" height="36" rx="6"/>
+  <text class="var" x="68" y="201" text-anchor="middle">y</text>
+
+  <text class="label" x="410" y="96" text-anchor="middle">integer object</text>
+  <rect class="obj" x="300" y="108" width="220" height="104" rx="10"/>
+  <path class="head" d="M 301 118 a 9 9 0 0 1 9 -9 h 200 a 9 9 0 0 1 9 9 v 44 h -218 z"/>
+  <line x1="300" y1="162" x2="520" y2="162" stroke="#2563eb" stroke-width="1"/>
+  <text class="field" x="316" y="132">type: int</text>
+  <text class="field" x="316" y="152">id:   140735957856544</text>
+  <text class="field" x="316" y="192">value: 3</text>
+
+  <path class="link" d="M 96 122 C 180 122, 220 142, 296 146" marker-end="url(#arrow)"/>
+  <path class="link" d="M 96 196 C 180 196, 220 178, 296 174" marker-end="url(#arrow)"/>
+
+  <text class="label" x="280" y="240" text-anchor="middle">two names, one object: nothing was copied.</text>
+</svg>

@@ -1,0 +1,15 @@
+[project]
+name = "ml4n"
+version = "0.1.0"
+description = "Machine Learning for Networking: executable Python lectures, exercises and labs."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "edtrace>=0.1.15",
+    "numpy>=2.5.3",
+]
+
+[tool.black]
+# edtrace replaces a source line with its rendering only at the line where the
+# step was recorded, so a wrapped text(...) call leaks its string as raw source.
+line-length = 400

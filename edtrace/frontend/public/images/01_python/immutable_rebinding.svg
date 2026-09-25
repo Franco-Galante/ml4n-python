@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 260" width="820" height="260" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="faded" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c3cfdc"/>
+    </marker>
+    <style>
+      .ref   { fill: #f5f9fd; stroke: #dbe4ee; stroke-width: 1.2; }
+      .obj   { fill: #ffffff; stroke: #8494a8; stroke-width: 1.3; }
+      .new   { fill: #eaf2fb; stroke: #2563eb; stroke-width: 1.6; }
+      .var   { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 15px; fill: #1f3550; font-weight: 700; }
+      .field { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; fill: #1f3550; }
+      .code  { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; fill: #1b4b91; font-weight: 600; }
+      .label { font-size: 12px; fill: #5b6b7f; }
+      .mono  { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1b4b91; }
+      .link  { stroke: #2563eb; stroke-width: 1.5; fill: none; }
+      .gone  { stroke: #c3cfdc; stroke-width: 1.3; stroke-dasharray: 5 4; fill: none; }
+    </style>
+  </defs>
+
+  <!-- before -->
+  <text class="code" x="20" y="30">x = 5.6</text>
+  <text class="code" x="20" y="48">y = x</text>
+  <rect class="ref" x="30" y="72" width="52" height="34" rx="6"/>
+  <text class="var" x="56" y="94" text-anchor="middle">x</text>
+  <rect class="ref" x="30" y="158" width="52" height="34" rx="6"/>
+  <text class="var" x="56" y="180" text-anchor="middle">y</text>
+  <rect class="obj" x="200" y="98" width="170" height="68" rx="10"/>
+  <line x1="200" y1="126" x2="370" y2="126" stroke="#dbe4ee"/>
+  <text class="field" x="214" y="117">type: float</text>
+  <text class="field" x="214" y="151">value: 5.6</text>
+  <path class="link" d="M 82 89 C 140 89, 150 118, 196 124" marker-end="url(#arrow)"/>
+  <path class="link" d="M 82 175 C 140 175, 150 146, 196 140" marker-end="url(#arrow)"/>
+
+  <line x1="410" y1="16" x2="410" y2="206" stroke="#dbe4ee" stroke-width="1"/>
+
+  <!-- after -->
+  <text class="code" x="430" y="30">y = 3</text>
+  <rect class="ref" x="440" y="72" width="52" height="34" rx="6"/>
+  <text class="var" x="466" y="94" text-anchor="middle">x</text>
+  <rect class="ref" x="440" y="158" width="52" height="34" rx="6"/>
+  <text class="var" x="466" y="180" text-anchor="middle">y</text>
+  <rect class="obj" x="620" y="56" width="170" height="68" rx="10"/>
+  <line x1="620" y1="84" x2="790" y2="84" stroke="#dbe4ee"/>
+  <text class="field" x="634" y="75">type: float</text>
+  <text class="field" x="634" y="109">value: 5.6</text>
+  <rect class="new" x="620" y="142" width="170" height="68" rx="10"/>
+  <line x1="620" y1="170" x2="790" y2="170" stroke="#2563eb" stroke-width="1"/>
+  <text class="field" x="634" y="161">type: int</text>
+  <text class="field" x="634" y="195">value: 3</text>
+  <text class="label" x="800" y="228" text-anchor="end">a new object</text>
+  <path class="link" d="M 492 89 H 616" marker-end="url(#arrow)"/>
+  <path class="gone" d="M 492 170 C 550 160, 570 118, 616 104" marker-end="url(#faded)"/>
+  <path class="link" d="M 492 178 H 616" marker-end="url(#arrow)"/>
+
+  <line x1="20" y1="236" x2="800" y2="236" stroke="#dbe4ee" stroke-width="1"/>
+  <text class="label" x="20" y="254">The float object is never modified: <tspan class="mono">y = 3</tspan> creates a new int object and moves the reference <tspan class="mono">y</tspan> onto it.</text>
+</svg>

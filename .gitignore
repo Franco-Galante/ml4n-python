@@ -1,0 +1,15 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+.ipynb_checkpoints/
+
+# Virtual environment (uv sync)
+.venv
+
+# Generated when you run the lectures
+var/
+pdf/
+_site/
+node_modules/
+
+labs/*/*.csv
