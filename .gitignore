@@ -12,4 +12,5 @@ pdf/
 _site/
 node_modules/
 
+# Lab datasets are downloaded by the notebooks, not distributed here
 labs/*/*.csv

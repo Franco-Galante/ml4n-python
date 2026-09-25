@@ -67,8 +67,8 @@ Close and reopen PowerShell after installation if needed.
 ## Step 1 - Download the course once
 
 ```bash
-git clone --recurse-submodules https://github.com/Franco-Galante/ml4n-students.git
-cd ml4n-students
+git clone --recurse-submodules https://github.com/Franco-Galante/ml4n-python.git
+cd ml4n-python
 ```
 
 `--recurse-submodules` also downloads the viewer, which lives in the `edtrace/` folder as a separate repository (a git *submodule*). If you cloned without it, `edtrace/` is empty; fix it with:
