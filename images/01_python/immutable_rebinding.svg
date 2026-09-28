@@ -37,7 +37,7 @@
   <line x1="410" y1="16" x2="410" y2="206" stroke="#dbe4ee" stroke-width="1"/>
 
   <!-- after -->
-  <text class="code" x="430" y="30">y = 3</text>
+  <text class="code" x="430" y="30">y = 3000</text>
   <rect class="ref" x="440" y="72" width="52" height="34" rx="6"/>
   <text class="var" x="466" y="94" text-anchor="middle">x</text>
   <rect class="ref" x="440" y="158" width="52" height="34" rx="6"/>
@@ -49,12 +49,12 @@
   <rect class="new" x="620" y="142" width="170" height="68" rx="10"/>
   <line x1="620" y1="170" x2="790" y2="170" stroke="#2563eb" stroke-width="1"/>
   <text class="field" x="634" y="161">type: int</text>
-  <text class="field" x="634" y="195">value: 3</text>
+  <text class="field" x="634" y="195">value: 3000</text>
   <text class="label" x="800" y="228" text-anchor="end">a new object</text>
   <path class="link" d="M 492 89 H 616" marker-end="url(#arrow)"/>
   <path class="gone" d="M 492 170 C 550 160, 570 118, 616 104" marker-end="url(#faded)"/>
   <path class="link" d="M 492 178 H 616" marker-end="url(#arrow)"/>
 
   <line x1="20" y1="236" x2="800" y2="236" stroke="#dbe4ee" stroke-width="1"/>
-  <text class="label" x="20" y="254">The float object is never modified: <tspan class="mono">y = 3</tspan> creates a new int object and moves the reference <tspan class="mono">y</tspan> onto it.</text>
+  <text class="label" x="20" y="254">The float object is never modified: <tspan class="mono">y = 3000</tspan> creates a new int object and moves the reference <tspan class="mono">y</tspan> onto it.</text>
 </svg>

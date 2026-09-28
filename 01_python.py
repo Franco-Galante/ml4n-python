@@ -13,7 +13,7 @@ Giobergia, Elena Baralis, and Gabriele Ciravegna.
 """
 
 from edtrace import text
-from support.python_content import AUTHORS, BREAK_CONTINUE, COMPREHENSION_SYNTAX, CONTAINERS, DATA_TYPES, DEFAULT_ARGS, EXTENSION_LABELS, IDE_VS_NOTEBOOK, JAVA_VS_PYTHON, METHOD_TEMPLATE, OPEN_CLOSE, PRIVATE_TRIANGLE, RUN_SCRIPT, VSCODE_LABELS
+from support.python_content import AUTHORS, BREAK_CONTINUE, COMPREHENSION_SYNTAX, CONTAINERS, CREATE_VENV, DATA_TYPES, DEFAULT_ARGS, EXTENSION_LABELS, IDE_VS_NOTEBOOK, JAVA_VS_PYTHON, METHOD_TEMPLATE, OPEN_CLOSE, PRIVATE_TRIANGLE, RUN_SCRIPT, VSCODE_LABELS
 from support.python_lab import describe, interpreter_facts, make_triangle, read_text
 from support.slides import CALLOUT, SUBLIST, SUBSUBLIST, annotated_figure, code_block, code_row, demo, explain, figure, people_row, section, table_all, table_head, table_row, theme
 
@@ -45,17 +45,15 @@ def title():
 
     section("The Python part of the course")
     text("1. **Python engine and language** - setup, data types, object oriented programming *(today)*")
-    text("2. **Numpy library** - computation with multi-dimensional arrays")
-    text("3. **Pandas library** - tabular data and data preprocessing")
-    text("4. **Matplotlib library** - data visualization and graphics")
+    text("2. **NumPy library** - computation with multi-dimensional arrays")
+    text("3. **pandas and Matplotlib libraries** - tabular data, data preprocessing and data visualization")
 
     section("Today")
     text("- **Executing Python programs**: Python programs, Python setup")
     text("- **Python language**: data types, controlling program flow, functions, lambda functions, list comprehensions, classes")
-    text("- And to close: reading and writing **files**")
     text("- **Lab 1**: a first hands-on experience with Python")
     variable_panel = "Here!"  # any inspected variable opens the panel
-    text("**How to read this lecture:** every code example now *runs*, the values of the variables are shown in a overlay panel. While I step through the code watch the variable panel!", style=CALLOUT)  # @inspect variable_panel
+    text("**How to read this lecture:** every code example *runs*, the values of the variables are shown in an overlay panel. While I step through the code watch the variable panel!", style=CALLOUT)  # @inspect variable_panel
 
 
 def executing_python_programs():
@@ -72,12 +70,11 @@ def executing_python_programs():
     text("- **Main advantage of bytecode**: the translation to bytecode is automatic and the same on every machine, so you share the source code as is and it runs on any system with a Python interpreter.", style=SUBLIST)
     text("- Only the interpreter is built for each platform, not your program, as would happen in C or C++.", style=SUBSUBLIST)
 
-    section("A common Python 3 setup on a Linux system")
-    text("Typically in the `/usr/bin` folder:")
-    text("- `python3`: run Python programs", style=SUBLIST)
-    text("- `ipython3`: run programs line by line", style=SUBLIST)
-    text("- `jupyter`: run a Jupyter notebook", style=SUBLIST)
-    text("- `pip3`: install Python packages", style=SUBLIST)
+    section("A common Python 3 setup")
+    text("- `python3`: run Python programs - usually already installed; if not, e.g. on Ubuntu: `sudo apt install python3`", style=SUBLIST)
+    text("- `ipython3`: run programs line by line (to be installed)", style=SUBLIST)
+    text("- `jupyter`: run a Jupyter notebook (to be installed)", style=SUBLIST)
+    text("- `pip3`: install Python packages (use it in a virtual environment)", style=SUBLIST)
     text("To find where your Python commands live, on **Linux and macOS** use `which <command>`:")
     figure("images/01_python/terminal_which.png", width="671px")  # same width as where.exe: terminal text at the body size @stepover
     text("On **Windows**, in PowerShell, use `where.exe <command>`. Type the `.exe`: in PowerShell a bare `where` is an alias of `Where-Object`, not the command lookup.")
@@ -89,23 +86,28 @@ def executing_python_programs():
     code_row(RUN_SCRIPT)  # @stepover
     text("Type in your terminal: move to the folder that contains the script, then hand the script to the interpreter.")
 
-    section("Running Python line by line with IPython")
-    text("Type `ipython3` (or `ipython`, depending on your installation) in your terminal:")
-    figure("images/01_python/interactive_python.mp4", width="1044px", poster="images/01_python/interactive_python_poster.png")  # terminal text at the body size @stepover
-
     section("Installing libraries")
-    text("- Python comes with many useful libraries: **Numpy, Pandas, Matplotlib, Scikit-learn, SciPy**, ...", style=SUBLIST)
-    text("- To use any of them, you first have to install it with the `pip` command: `pip3 install <package>`, e.g. `pip3 install numpy`, `pip3 install pandas`. On **Windows** the command is usually just `pip`.", style=SUBLIST)
-    figure("images/01_python/pip_install.png", width="767px")  # terminal text at the body size @stepover
+    text("Python is complemented by many **third-party** libraries: **NumPy, pandas, Matplotlib, scikit-learn**, ... You need to install them with `pip`:")
+    text("- **Windows**: `pip install numpy` works out of the box, if Python is on the `PATH` (tick *Add python.exe to PATH* in the installer). A virtual environment is still a good idea, next slide.", style=SUBLIST)
+    text("- **Linux**: on recent distributions (Ubuntu 23.04+, Debian 12+), `pip3 install` on the system Python is **blocked**.", style=SUBLIST)
+    text("- The system Python belongs to the operating system (system tools depend on it), and pip could overwrite packages they rely on.", style=SUBSUBLIST)
+    text("- Use `pip` within a virtual environment (**recommended**, next slide).", style=SUBSUBLIST)
+    text("- Distribution packages, e.g. `sudo apt install python3-numpy` (installed system-wide, often older versions, and not every library is packaged).", style=SUBSUBLIST)
 
     section("Virtual environments")
-    text("- The `pip` command associates the libraries to your **default Python installation**.", style=SUBLIST)
-    text("- A more powerful way of managing libraries is to use a Python **environment** (`virtualenv` or `conda`).", style=SUBLIST)
+    text("- A **virtual environment** is a folder with its own Python and its own libraries: one per project.", style=SUBLIST)
     text("- Useful when you have **many projects** that use different libraries and **configurations** (e.g. versions).", style=SUBSUBLIST)
-    text("- Each project is associated to its own virtual environment.", style=SUBSUBLIST)
+    text("- Create it with `venv`, part of Python (on Debian/Ubuntu, first `sudo apt install python3-venv`); `conda` is an alternative.", style=SUBLIST)
+    code_row(CREATE_VENV)  # @stepover
+    text("- Once activated, `python` and `pip` are the ones in `.venv`: libraries go there, not into the system.", style=SUBLIST)
+    text("- On **Windows**, if activation fails with *running scripts is disabled on this system*, enable script execution once: `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`.", style=SUBLIST)
     text("This lecture is itself a Python program, running inside the virtual environment of the course repository:")
     facts = interpreter_facts()  # @inspect facts
-    text("- `in_virtual_env` is `True`: the course uses `uv`, which creates the environment in `.venv/` (`uv sync`) and runs commands inside it.", style=SUBLIST)
+    text("**Tip: `uv`.** A newer tool that does all of the above in one place (creates the environment, installs packages, even installs Python itself), and much faster than pip. It is quickly becoming popular, and this course uses it: `uv sync` built the `.venv/` this lecture runs in.", style=CALLOUT)
+
+    section("Running Python line by line with IPython")  # @clear facts
+    text("Type `ipython` in your terminal (install it in your virtual environment with `pip install ipython`):")
+    figure("images/01_python/interactive_python.mp4", width="1044px", poster="images/01_python/interactive_python_poster.png")  # terminal text at the body size @stepover
 
 
 def development_scenarios():
@@ -133,15 +135,14 @@ def development_scenarios():
     explain(EXTENSION_LABELS, 2)  # @stepover
 
     section("Scenario 2: Jupyter notebook")
-    text("- Jupyter needs the `notebook` package: install it with `pip install notebook`.", style=SUBLIST)
+    text("- Jupyter needs the `notebook` package: inside your virtual environment, install it with `pip install notebook`.", style=SUBLIST)
     text("- Then type `jupyter notebook` in your terminal: Jupyter opens in your browser.", style=SUBLIST)
-    text("- Click **New**, then **Python 3**, to create a new, empty notebook.", style=SUBLIST)
+    text("- Click **New**, then **Python 3 (ipykernel)**, to create a new, empty notebook.", style=SUBLIST)
     figure("images/01_python/notebook_setup.mp4", poster="images/01_python/notebook_setup_poster.png")  # @stepover
     text("A notebook is a sequence of **cells**:")
     text("- **Markdown cells**: comments, titles, and the organization of your work.", style=SUBLIST)
     text("- **Code cells**: the code to run.", style=SUBLIST)
-    text("- **Output cells**: under each code cell, the result of running it.", style=SUBLIST)
-    text("- Based on the **IPython** command.", style=SUBLIST)
+    text("- **Output**: under each code cell, the result of running it.", style=SUBLIST)
     text("- Each code cell can be executed **separately** by pressing `CTRL + ENTER`.", style=SUBLIST)
     text("⚠️ **Stale imports**: the cells run in one Python process, the **kernel**, which loads each module only **once**. After editing your own module, running `import` again keeps the old version: **restart the kernel** (or turn on `%autoreload`).", style=CALLOUT)
 
@@ -186,11 +187,11 @@ def python_language():
     id_x = id(x)  # @inspect id_x
     id_y = id(y)  # @inspect id_y
     text("Same identifier: `x` and `y` are two references to **one** object. Now, if you assign `y` to a new value...")
-    y = 3  # @inspect y
+    y = 3000  # @inspect y
     id_y = id(y)  # @inspect id_y
     text("...`id_y` changes and `id_x` does not: `x` still refers to the float `5.6`, while `y` refers to a **new** integer object.")
     figure("images/01_python/immutable_rebinding.svg")  # @stepover @clear x y id_x id_y
-    text("What this shows is **rebinding**: `y = 3` does not touch the float object, it points `y` at a different one, and `x` is left alone. The **question** now is whether an object can be **changed** once it exists.", style=CALLOUT)
+    text("What this shows is **rebinding**: `y = 3000` does not touch the float object, it points `y` at a different one, and `x` is left alone. The **question** now is whether an object can be **changed** once it exists.", style=CALLOUT)
 
     section("Mutable and immutable objects")
     text("Starting again from two \"references\" pointing to one float, let's try to modify its value:")
@@ -212,16 +213,16 @@ def basic_data_types():
     section("Basic building blocks and containers")
     table_head(DATA_TYPES)  # @stepover
     table_row(DATA_TYPES, "**Basic")  # @stepover
-    table_row(DATA_TYPES, "**Containers**: seq")  # @stepover
-    table_row(DATA_TYPES, "**Containers**: col")  # @stepover
+    table_row(DATA_TYPES, "**Containers**: imm")  # @stepover
+    table_row(DATA_TYPES, "**Containers**: mut")  # @stepover
     text("**Note:** Python is *dynamically typed*. Watch the type of `value` on the panel:", style=CALLOUT)
     value = 1  # @inspect value
     value = "hello"  # @inspect value
     text("The object has a type; the variable is just a reference, and it can refer to an object of any type.")
 
     demo("int, float")  # @clear value
-    text("- **No theoretical size limit**: effectively limited by the available memory.", style=SUBLIST)
-    text("- Available operations: `+`, `-`, `*`, `/`, `//` (integer division), `%` (remainder), `**` (exponentiation).", style=SUBLIST)
+    text("- `int` has **no theoretical size limit** (only the available memory); `float` is a 64-bit number, with limited range (up to about `1.8e308`) and precision.", style=SUBLIST)
+    text("- Available operations: `+`, `-`, `*`, `/`, `//` (floor division), `%` (remainder), `**` (exponentiation).", style=SUBLIST)
     x = 9  # @inspect x
     y = 5  # @inspect y
     r1 = x // y  # @inspect r1
@@ -239,10 +240,10 @@ def basic_data_types():
     is_rainy = not is_sunny  # @inspect is_rainy
     temperature1 = 30
     temperature2 = 35
-    raising = temperature2 > temperature1  # @inspect raising
+    rising = temperature2 > temperature1  # @inspect rising
     text("A comparison is an expression like any other: its value is a `bool`.")
 
-    demo("str")  # @clear is_sunny is_rainy raising
+    demo("str")  # @clear is_sunny is_rainy rising
     text("Definition with **single or double quotes** is equivalent: pick the one that lets you write the other inside the string.")
     string1 = "Python's nice"  # with double quotes @inspect string1
     string2 = 'He said "yes"'  # with single quotes @inspect string2
@@ -257,7 +258,7 @@ def basic_data_types():
     r4 = float("6.7")  # @inspect r4
     r5 = bool("True")  # @inspect r5
     r6 = bool(0)  # @inspect r6
-    text("Only `0`, `\"\"`, `[]`, `{}`, `set()` and `()` convert to `False` through `bool()`. Which means:")
+    text("Zero (`0`, `0.0`), `None`, `False` and empty strings and containers (`\"\"`, `[]`, `{}`, `set()`, `()`) convert to `False` through `bool()`. Which means:")
     r7 = bool("False")  # a non-empty string @inspect r7 @clear r1 r2 r3 r4
     text("`bool()` does not read the text: any non-empty string is `True`.")
 
@@ -287,7 +288,7 @@ def basic_data_types():
     s2 = s1[:-1]  # @inspect s2
     s3 = s1[:-2]  # @inspect s3
     s4 = s1[-3:]  # @inspect s4
-    text("`s1[-3:]` is the usual way to read a file extension.")
+    text("`s1[-3:]` is a way to read a file extension, if it has three letters.")
 
     demo("Strings: concatenation")  # @clear s1 s2 s3 s4
     text("Use the `+` operator:")
@@ -322,8 +323,8 @@ def basic_data_types():
 def tuples_and_lists():
     text("# 5. Tuples and lists")
     demo("Tuple")
-    text("An **immutable** sequence of variables. Definition:")
-    t1 = ("Turin", "Italy")  # city and state @inspect t1
+    text("An **immutable** sequence of values. Definition:")
+    t1 = ("Turin", "Italy")  # city and country @inspect t1
     t2 = "Paris", "France"  # optional parentheses @inspect t2
     t3 = ("Rome", 2, 25.6)  # can contain different types @inspect t3
     t4 = ("London",)  # tuple with a single element @inspect t4
@@ -333,9 +334,9 @@ def tuples_and_lists():
     demo("Tuple unpacking")  # @clear t1 t2 t3 t4 t5
     text("**Assigning** a tuple to a set of variables:")
     city_record = ("Turin", "Italy", 12)  # a different name from the city_data below, so the panel lists it in the order it is built @inspect city_record
-    city, state, temperature = city_record  # @inspect city state temperature
+    city, country, temperature = city_record  # @inspect city country temperature
     text("**Swapping** elements is an interesting case of unpacking:")
-    a = 1  # @inspect a @clear city_record city state temperature
+    a = 1  # @inspect a @clear city_record city country temperature
     b = 2  # @inspect b
     a, b = b, a  # @inspect a b
     text("The right-hand side builds the tuple `(2, 1)` first, then it is unpacked into `a` and `b`: no temporary variable needed.")
@@ -391,7 +392,7 @@ def tuples_and_lists():
     l1 = [0, 1, 2]  # @inspect l1
     myval = 2
     found = myval in l1  # True, since 2 is in l1 @inspect found
-    text("**Iterate** over the list elements. Where the slide prints each element, we collect it in `output`: `print()` only reaches the terminal, not this screen.")
+    text("**Iterate** over the list elements. Instead of printing each element, we collect it in `output`: `print()` only reaches the terminal, not this screen.")
     output = []  # @clear found
     for el in l1:  # @inspect el
         output.append(el)  # instead of print(el) @inspect output
@@ -443,7 +444,7 @@ def sets_and_dictionaries():
     text("A collection of **key-value** pairs that allows fast **access** of elements **by key**. Keys are **unique**.")
     d1 = {"Name": "John", "Age": 25}  # @inspect d1
     d0 = {}  # empty dictionary @inspect d0
-    text("**Keys** must be **hashable** types: e.g. `int`, `float`, `str`, `bool`, `tuple`. **Values** can be any Python object.")
+    text("**Keys** must be **hashable** types: e.g. `int`, `float`, `str`, `bool`, `tuple` (if its elements are hashable). **Values** can be any Python object.")
     d1 = {("a", "b"): 120, ("c", "d", "e"): 1000}  # itemsets and their support @inspect d1 @clear d0
     try:
         d2 = {["a", "b"]: 120}  # a list as a key
@@ -497,7 +498,7 @@ def copying_objects():
     text("# 7. Shallow vs deep copy")
     section("Two ways of copying")
     text("- **Shallow**: copies the parent object, and shares the references to its children.", style=SUBLIST)
-    text("- **Deep**: recursively copies all the children of the parent object.", style=SUBLIST)
+    text("- **Deep**: recursively copies all the children of the parent object (immutable children can safely stay shared).", style=SUBLIST)
     figure("images/01_python/shallow_vs_deep_copy.svg")  # @stepover
 
     demo("Shallow copy")
@@ -570,7 +571,7 @@ def controlling_program_flow():
     text("They alter the flow of a `for` or a `while` loop: `continue` jumps to the next iteration, `break` leaves the loop altogether.")
     code_block(BREAK_CONTINUE, language="python")  # @stepover
     text("Three turns only: `skip` is skipped, `end` stops the loop, and `van` is never even read.")
-    text("⚠️ Careful when the same loop reads the **lines of a file**: every line keeps its newline, so the value to compare is `'skip\\n'` and not `'skip'`, and nothing is ever skipped. `line.strip()` is the fix - we come back to it in section 12.", style=CALLOUT)
+    text("⚠️ Careful when the same loop reads the **lines of a file**: every line keeps its newline, so the value to compare is `'skip\\n'` and not `'skip'`, and nothing is ever skipped. `line.strip()` is the fix (see section 12).", style=CALLOUT)
 
 
 def functions():
@@ -587,7 +588,7 @@ def functions():
 
     result1 = f"{euclidean_distance([1, 2, 3], [2, 4, 5]):.2f}"  # invocation @inspect result1
 
-    demo("Variable scope: local")  # @clear result1 result2
+    demo("Variable scope: local")  # @clear result1
     text("Scope rules specify the **visibility** of variables.")
 
     def my_func(x, y):
@@ -704,6 +705,8 @@ def classes():
     triangle1 = Triangle(2, 4, 3)  # invoke the constructor and instantiate a new Triangle @inspect triangle1.a triangle1.b triangle1.c
     triangle2 = Triangle(2, 5, 2)  # @inspect triangle2.a triangle2.b triangle2.c
     text("`self` is a reference to the **current object**: the same `__init__` filled in two different triangles.")
+    text("- `num_edges` is a **class attribute**: defined in the class body, one value shared by all the instances.", style=SUBLIST)
+    text("- `a`, `b`, `c` are **instance attributes**: assigned through `self`, every object has its own values.", style=SUBLIST)
 
     section("Methods")  # @clear triangle1.a triangle1.b triangle1.c triangle2.a triangle2.b triangle2.c
     text("- Equivalent to Python functions, but defined **inside a class**.", style=SUBLIST)
@@ -734,6 +737,7 @@ def classes():
     except AttributeError as error:
         message = describe(error)  # @inspect message
     text("Under the hood Python **renames** the attribute to `_Triangle__perimeter`: private by convention, protected against accidents, not locked.")
+    text("*Note: by convention, a **single** leading underscore (`_perimeter`) already marks an attribute as private. Two underscores trigger the renaming above (name mangling), meant mainly to avoid name clashes in subclasses.*")
 
 
 def files():
@@ -779,7 +783,7 @@ def files():
     with open(scratch, "w") as f:
         f.write("Two weeks of measurements\n")
     with open(scratch, "w") as f:  # opening with w cancels all the existing content
-        f.write("Ops I deleted everything!")
+        f.write("Oops I deleted everything!")
     content = read_text(scratch)  # @inspect content
     text("Example: make a **copy** of a file.")
     copy_path = "var/data/my_file_copy.txt"  # @clear content
@@ -799,7 +803,6 @@ def closing():
     text("3) **Copies are shallow** by default: `copy.deepcopy` when the children must not be shared.", style=SUBLIST)
     text("4) **Scope**: a function reads global variables, but assigning creates a local one.", style=SUBLIST)
     text("5) **Comprehensions and lambdas** shorten code; readability decides how much.", style=SUBLIST)
-
 
 
 def before_lab_1():

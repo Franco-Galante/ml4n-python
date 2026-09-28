@@ -15,6 +15,11 @@ RUN_SCRIPT = [
     ("terminal", "cd ~/Documents/MyScript\npython3 my_script.py"),
 ]
 
+CREATE_VENV = [
+    ("Linux / macOS (terminal)", "python3 -m venv .venv\nsource .venv/bin/activate\npip install numpy"),
+    ("Windows (PowerShell)", "python -m venv .venv\n.venv\\Scripts\\activate\npip install numpy"),
+]
+
 # Name tags for images/01_python/VS_code_1.png: x and y are percent of the
 # image, place is where the tag sits relative to that point (see slides.py).
 # `description` is revealed step by step by explain() in a card placed at
@@ -58,8 +63,8 @@ DATA_TYPES = {
     "widths": ["28%", "36%", "36%"],
     "rows": [
         ["**Basic building blocks**", "`int`, `float`, `bool`, `str`, `None`", "**No**: all of these objects are immutable"],
-        ["**Containers**: sequence", "`tuple`", "**No**: an immutable list of objects"],
-        ["**Containers**: collections", "`list`, `set`, `dict`", "**Yes**: mutable collections of objects"],
+        ["**Containers**: immutable", "`tuple`", "**No**: an immutable sequence of objects"],
+        ["**Containers**: mutable", "`list`, `set`, `dict`", "**Yes**: mutable collections of objects"],
     ],}
 
 # ---------------------------------------------------------- containers --

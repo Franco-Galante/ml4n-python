@@ -37,11 +37,12 @@
   <rect class="card" x="474" y="30" width="170" height="140" rx="12"/>
   <text class="name" x="490" y="56">Bytecode (.pyc)</text>
   <line x1="490" y1="66" x2="628" y2="66" stroke="#dbe4ee"/>
-  <text class="op" x="490" y="88">BUILD_LIST</text>
-  <text class="op" x="490" y="104">STORE_NAME   l</text>
-  <text class="op" x="490" y="120">LOAD_NAME    range</text>
-  <text class="op" x="490" y="136">GET_ITER</text>
-  <text class="op" x="490" y="152">FOR_ITER     …</text>
+  <text class="op" x="490" y="86">BUILD_LIST</text>
+  <text class="op" x="490" y="100">STORE_NAME   l</text>
+  <text class="op" x="490" y="114">LOAD_NAME    range</text>
+  <text class="op" x="490" y="128">…</text>
+  <text class="op" x="490" y="142">GET_ITER</text>
+  <text class="op" x="490" y="156">FOR_ITER     …</text>
 
   <path class="link" d="M 644 100 H 684" marker-end="url(#arrow)"/>
 
