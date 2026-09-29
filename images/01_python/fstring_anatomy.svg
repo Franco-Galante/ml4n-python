@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 170" width="640" height="170" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 146" width="640" height="146" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
@@ -34,6 +34,4 @@
   <text class="mono" x="448" y="118" text-anchor="middle">5</text>
   <text class="role" x="506" y="118">value of the variable,</text>
   <text class="role" x="506" y="134">read at run time</text>
-
-  <text class="role" x="12" y="160">Everything outside the braces is copied as is; each <tspan class="mono">{expression}</tspan> is replaced by its value.</text>
 </svg>

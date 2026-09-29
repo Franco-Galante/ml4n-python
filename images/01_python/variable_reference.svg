@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 56 560 160" width="560" height="160" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 56 560 142" width="560" height="142" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
@@ -29,6 +29,4 @@
   <text class="field" x="316" y="166">value: 3</text>
 
   <path class="link" d="M 96 108 C 180 108, 220 126, 296 130" marker-end="url(#arrow)"/>
-
-  <text class="label" x="280" y="205" text-anchor="middle">the name <tspan class="mono">a</tspan> refers to an integer object, it does not contain it.</text>
 </svg>

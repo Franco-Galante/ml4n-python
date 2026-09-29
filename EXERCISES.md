@@ -24,21 +24,4 @@ Short notebooks to practise each topic of the lectures. Click **Open in Colab** 
 <tr><td align="center"><b>2.3</b></td><td><b>Numpy array manipulation</b></td><td align="center"><a href="https://colab.research.google.com/github/Franco-Galante/ml4n-python/blob/main/exercises/02_numpy/2.3_numpy_array_manipulation.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab"></a></td></tr>
 </table>
 
-### Exercises 3 - Pandas
-
-<table align="center">
-<tr><th>#</th><th>Exercise</th><th>Notebook</th></tr>
-<tr><td align="center"><b>3.1</b></td><td><b>Pandas series and dataframes</b></td><td align="center"><a href="https://colab.research.google.com/github/Franco-Galante/ml4n-python/blob/main/exercises/03_pandas/3.1_pandas_series_and_dataframes.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab"></a></td></tr>
-<tr><td align="center"><b>3.2</b></td><td><b>Pandas grouping</b></td><td align="center"><a href="https://colab.research.google.com/github/Franco-Galante/ml4n-python/blob/main/exercises/03_pandas/3.2_pandas_grouping.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab"></a></td></tr>
-<tr><td align="center"><b>3.3</b></td><td><b>Pandas operations extra</b></td><td align="center"><a href="https://colab.research.google.com/github/Franco-Galante/ml4n-python/blob/main/exercises/03_pandas/3.3_pandas_operations_extra.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab"></a></td></tr>
-</table>
-
-### Exercises 4 - Matplotlib
-
-<table align="center">
-<tr><th>#</th><th>Exercise</th><th>Notebook</th></tr>
-<tr><td align="center"><b>4.1</b></td><td><b>Matplotlib figures and axes</b></td><td align="center"><a href="https://colab.research.google.com/github/Franco-Galante/ml4n-python/blob/main/exercises/04_matplotlib/4.1_matplotlib_figures_and_axes.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab"></a></td></tr>
-<tr><td align="center"><b>4.2</b></td><td><b>Matplotlib advanced plots</b></td><td align="center"><a href="https://colab.research.google.com/github/Franco-Galante/ml4n-python/blob/main/exercises/04_matplotlib/4.2_matplotlib_advanced_plots.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab"></a></td></tr>
-</table>
-
 [← Back to the README](README.md)
