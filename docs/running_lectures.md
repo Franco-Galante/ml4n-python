@@ -113,7 +113,7 @@ Start the viewer:
 npm run --prefix edtrace/frontend dev -- --port 5173 --strictPort
 ```
 
-Then open <http://localhost:5173/?trace=01_python>.
+Then open <http://localhost:5173/?trace=01_python> in Chrome (or another Chromium-based browser): the viewer is very slow in Safari.
 
 Leave the server running: to switch lecture, just change the `trace` parameter in the URL. Stop it with `Ctrl+C` in the terminal.
 
@@ -178,6 +178,8 @@ If you edited a lecture, `git pull` may refuse to overwrite your changes. Either
 **`uv`, `node`, or `npm` not found, right after installing it.** Close the terminal and open a new one so it picks up the updated `PATH`.
 
 **`Error loading trace` in the browser.** You have not executed that lecture yet, or the name in the URL does not match the lecture file. Run `uv run python tools/prepare_lecture.py <lecture_name>` and check the spelling.
+
+**The viewer is very slow.** If you are using Safari, switch to Chrome (or another Chromium-based browser).
 
 **The page stays blank.** Reload it: the viewer sometimes fails to start on the first load. If it is still blank, the viewer is not running, or it failed to start because port 5173 is already used by something else. Look at the terminal output; if the port is busy, start it without a fixed port and use the address it prints:
 

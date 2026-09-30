@@ -4,6 +4,8 @@ Lectures, exercises and labs of the Python part of the course **Machine Learning
 
 Click **▶ View lecture** in the table below to open a lecture in your browser, with nothing to install. The lectures are **interactive**: every example is real Python code, and you watch it in action, stepping through it line by line while a side panel shows the value of every variable. They are built with [edtrace](https://github.com/percyliang/edtrace), the framework for executable lectures by [Percy Liang](https://cs.stanford.edu/~pliang/) (Stanford), which records the run of a Python program and replays it in the browser.
 
+> **Browser:** the viewer is very slow in Safari; use Chrome (or another Chromium-based browser) instead.
+
 ## Lectures
 
 <table align="center">
