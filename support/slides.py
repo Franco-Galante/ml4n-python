@@ -63,6 +63,17 @@ THEME_CSS = """
 /* Numpy arrays reach the panel as <table class="matrix">: monospace and right
    aligned, so the columns line up the way an array printout does. */
 .env .matrix > tbody > tr > td { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; text-align: right; padding: 3px 8px; border-color: #dbe4ee; }
+/* pandas objects reach the panel as a matrix of strings whose top-left cell is
+   empty (see support/pandas_matplotlib_lab.py), which no numeric array has:
+   their header rows (one per column level) and index column are set in bold,
+   as in a notebook. */
+.env .matrix:has(> tbody > tr:first-child > td:first-child:empty) > tbody > tr:has(> td:first-child:empty) > td { font-weight: 700; border-bottom: 2px solid #8494a8; }
+.env .matrix:has(> tbody > tr:first-child > td:first-child:empty) > tbody > tr > td:first-child { font-weight: 700; background: #f5f9fd; }
+/* A Series has a first row of two empty cells instead (no column names): it is
+   hidden, and the last row - `Name: ..., dtype: ...`, as pandas prints it - is
+   set small and grey, so the name never reads as a column header. */
+.env .matrix:has(> tbody > tr:first-child > td:first-child:empty + td:empty:last-child) > tbody > tr:first-child { display: none; }
+.env .matrix:has(> tbody > tr:first-child > td:first-child:empty + td:empty:last-child) > tbody > tr:last-child > td { font-weight: 400; font-size: 0.75em; color: #5b6b7f; background: none; border-bottom: 0; text-align: left; }
 /* The panel sizes to its content (up to max-width): no stretched gaps between a name, "=" and its value. */
 .env > tbody > tr > td:nth-child(-n+2) { white-space: nowrap; padding-right: 0.5em; }
 /* The lecture's own executed lines: the same tinted box as a code_block, so
@@ -226,21 +237,60 @@ def _plain_line_rules(path: str) -> str:
         else:
             plain.update(range(start, node.end_lineno + 1))  # docstring, imports, constants
 
+    positions = _dom_positions(source)
+    # Mirrors the band selector exactly, plus :nth-child, so it is the more
+    # specific of the two and wins.
+    selectors = [f".line:nth-child({positions[number]}) > span:last-child > .code-container:last-child:not(:empty)" for number in sorted(plain) if number in positions]
+    return f"{','.join(selectors)}{{background:none;border-left:0;padding-left:0;}}" if selectors else ""
+
+
+def _dom_positions(source: str) -> dict[int, int]:
+    """Source line number -> position of that line among the .line elements of the viewer.
+
+    The viewer renders the trimmed file and skips @hide-den lines, so the two
+    numberings drift apart; CSS can only address a line by its position.
+    """
     lines = source.split("\n")
     leading = 0
     while leading < len(lines) and not lines[leading].strip():
         leading += 1  # the viewer trims the file before splitting it
 
-    position, selectors = 0, []
+    position, positions = 0, {}
     for number, line in enumerate(lines[leading:], start=leading + 1):
         if re.search(r"#.*@hide", line):
             continue  # hidden lines never reach the DOM
         position += 1
-        if number in plain:
-            # Mirrors the band selector exactly, plus :nth-child, so it is the
-            # more specific of the two and wins.
-            selectors.append(f".line:nth-child({position}) > span:last-child > .code-container:last-child:not(:empty)")
-    return f"{','.join(selectors)}{{background:none;border-left:0;padding-left:0;}}" if selectors else ""
+        positions[number] = position
+    return positions
+
+
+def compact_panel(font_size: str = "14px") -> None:
+    """Shrink the variable panel from this line to the end of its section.
+
+    The section ends at the next section()/demo() divider, or at the end of
+    the calling function, whichever comes first.
+
+    For the odd example whose values are too wide for the panel's usual size
+    (a DataFrame with many columns).  The panel is one element for the whole
+    lecture, so the rule is scoped by the *current step*: it applies while the
+    highlighted line is one of those lines, and the panel goes back to its
+    normal size as soon as the lecture steps past them.  Like theme(), the call
+    renders an invisible <style> and its own line is collapsed.
+    """
+    caller = inspect.stack()[1]
+    try:
+        with open(caller.filename, encoding="utf-8") as handle:
+            source = handle.read()
+    except OSError:
+        return
+    start = caller.lineno
+    end = min((node.end_lineno for node in ast.walk(ast.parse(source)) if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.lineno <= start <= node.end_lineno), default=start)
+    lines = source.split("\n")
+    end = next((number - 1 for number in range(start + 1, end + 1) if re.match(r"\s*(section|demo)\(", lines[number - 1])), end)  # stop before the next divider
+    positions = _dom_positions(source)
+    current = ",".join(f".lines-panel .line:nth-child({positions[number]}).current-line" for number in range(start, end + 1) if number in positions)
+    rule = f"body:has({current}) .env{{font-size:{font_size};line-height:1.3;}}" if current else ""
+    text(f"<style>{rule}.line:has(.compact-panel){{height:0;overflow:hidden;}}</style><span class=\"compact-panel\"></span>")
 
 
 # Figures: capped width so a tall diagram does not dominate the slide, centred
@@ -320,6 +370,11 @@ MOVIE_SUFFIXES = (".mp4", ".webm", ".mov", ".m4v")
 # indentation is done with a margin instead.  See the comment on _divider().
 SUBLIST = {"display": "block", "marginLeft": "2em"}
 SUBSUBLIST = {"display": "block", "marginLeft": "4em"}
+
+# A bullet with extra room on top: after executed code, e.g. between the steps
+# of a demo, so it does not read as a comment on the line above; or after the
+# sentence that introduces a list.
+SUBLIST_SPACED = {**SUBLIST, "marginTop": "12px"}
 
 
 def figure(path: str, caption: str | None = None, width: str = "100%", caption_width: str | None = None, poster: str | None = None) -> None:
@@ -790,16 +845,17 @@ def code_block(source: str, title: str | None = None, language: str | None = Non
     code_row([(title, source)], language=language)
 
 
-def code_row(blocks: list[tuple], gap: str = "16px", language: str | None = None) -> None:
+def code_row(blocks: list[tuple], gap: str = "16px", language: str | None = None, space_before: str = "22px") -> None:
     """Snippets side by side, e.g. the same loop in two languages.
 
     `blocks` is a list of (title, source) pairs, or (title, source, language)
     when the columns are in different languages - a Python snippet next to the
     shell commands that run it.  A title may be None; `language` is the default
-    for blocks that do not name one.
+    for blocks that do not name one.  `space_before` sets the gap above the row,
+    e.g. to set it apart from the executed code right before it.
     """
     columns = "".join(_code_column(block[0], block[1], block[2] if len(block) > 2 else language) for block in blocks)
-    text(f'<div style="display:flex; flex-wrap:wrap; align-items:flex-start; gap:{gap}; margin:22px 0 26px 0;">{columns}</div>')
+    text(f'<div style="display:flex; flex-wrap:wrap; align-items:flex-start; gap:{gap}; margin:{space_before} 0 26px 0;">{columns}</div>')
 
 
 def _code_column(title: str | None, source: str, language: str | None = None) -> str:

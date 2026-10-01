@@ -12,6 +12,7 @@ Click **▶ View lecture** in the table below to open a lecture in your browser,
 <tr><th>#</th><th>Lecture</th><th>Interactive viewer</th></tr>
 <tr><td align="center"><b>1</b></td><td><b>Introduction to Python</b></td><td align="center"><a href="https://franco-galante.github.io/ml4n-python/?trace=01_python"><img src="https://img.shields.io/badge/%E2%96%B6-View%20lecture-2ea44f?style=flat" alt="▶ View lecture"></a></td></tr>
 <tr><td align="center"><b>2</b></td><td><b>NumPy: Numerical Python</b></td><td align="center"><a href="https://franco-galante.github.io/ml4n-python/?trace=02_numpy"><img src="https://img.shields.io/badge/%E2%96%B6-View%20lecture-2ea44f?style=flat" alt="▶ View lecture"></a></td></tr>
+<tr><td align="center"><b>3</b></td><td><b>pandas and Matplotlib</b></td><td align="center"><a href="https://franco-galante.github.io/ml4n-python/?trace=03_pandas_and_matplotlib"><img src="https://img.shields.io/badge/%E2%96%B6-View%20lecture-2ea44f?style=flat" alt="▶ View lecture"></a></td></tr>
 </table>
 
 More lectures are added as the course goes on.
