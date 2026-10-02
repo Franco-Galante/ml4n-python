@@ -83,6 +83,7 @@ def series():
     text("- A **Series** is a one-dimensional sequence of **homogeneous** elements (the *values*), like a 1-D NumPy array.", style=SUBLIST)
     text("- Each element is associated with a label of an explicit **index**: integers, or strings such as dates or names.", style=SUBLIST)
     text("- The index is the whole set of names; each name in it is a **label**. We say \"by label\" (`.loc`) vs \"by position\" (`.iloc`), because \"by index\" could mean either.", style=SUBSUBLIST)
+    figure("images/03_pandas_and_matplotlib/series_anatomy.svg", width="278px")  # drawn at 1.2x its natural size @stepover
 
     demo("Creating a Series")
     text("A Series can be created in several ways:")
@@ -135,12 +136,15 @@ def series():
     text("- **Masking**: a comparison builds a boolean Series with the same index, and `&`, `|`, `~` combine masks, as in NumPy.", style=SUBLIST_SPACED)
     mask = (s1 > 2) & (s1 < 10)  # @inspect mask
     masked = s1.loc[mask]  # @inspect masked
-    text("- `.iloc` refuses this mask, because it is a Series with labels: masks go with `.loc`. (`.iloc` takes only a plain boolean array, e.g. `mask.to_numpy()`.)", style=SUBSUBLIST)
+    text("- `.iloc` refuses this mask, because its index is made of text labels, which cannot be read as positions: masks go with `.loc`, or pass `.iloc` a plain boolean array, `s1.iloc[mask.to_numpy()]`.", style=SUBSUBLIST)
     try:
         s1.iloc[mask]  # a boolean Series, read by position
     except ValueError as error:
         message = describe(error)  # @inspect message
-    text("- **Fancy indexing**: a list of labels with `.loc`, a list of positions with `.iloc`.", style=SUBLIST_SPACED)  # @clear message
+    text("- Since pandas 3.0, `.iloc` does take a boolean Series whose index is made of **integers** (e.g. the default `0, 1, 2, ...`), matched by label. pandas 2.x refuses any boolean Series (`NotImplementedError`): `.to_numpy()` works in both.", style=SUBSUBLIST)  # @clear message
+    numbers = pd.Series([2.0, 3.1, 4.5])  # the default index: 0, 1, 2 @inspect numbers
+    big_numbers = numbers.iloc[numbers > 2]  # pandas 3 only @inspect big_numbers
+    text("- **Fancy indexing**: a list of labels with `.loc`, a list of positions with `.iloc`.", style=SUBLIST_SPACED)  # @clear numbers big_numbers
     picked = s1.loc[["a", "c"]]  # a list of labels @inspect picked
     picked_too = s1.iloc[[0, 2]]  # a list of positions @inspect picked_too
     text("Plain brackets, `s1[s1 > 2]`, work too, but their meaning depends on what you put inside: on a Series, a single number is a **label** while a slice of numbers is a **position**; on a DataFrame, a name selects a **column** while a mask or a slice selects **rows**. `.loc` and `.iloc` always mean one thing: use them.")

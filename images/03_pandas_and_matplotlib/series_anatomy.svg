@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 232 202" width="232" height="202" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"><defs>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f3550"/></marker>
+  <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/></marker>
+  <marker id="c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ff4d00"/></marker>
+  <style>
+.cell { fill: #ffffff; stroke: #9db7d4; stroke-width: 1.1; }
+.hl   { fill: #fdf0cf; stroke: #e0a500; stroke-width: 1.4; }
+.br   { fill: #e3edfb; stroke: #9db7d4; stroke-width: 1.1; }
+.dim  { fill: #f5f9fd; stroke: #9db7d4; stroke-width: 1.1; }
+.bad  { fill: #c2185b; font-weight: 700; }
+.badcell { fill: #fde2ea; stroke: #c2185b; stroke-width: 1.6; }
+.p0   { stroke: #e0a500; stroke-width: 2; fill: none; }
+.p1   { stroke: #2563eb; stroke-width: 2; fill: none; }
+.s0   { fill: #fdf0cf; stroke: #e0a500; stroke-width: 1.4; }
+.s1   { fill: #dbe8fb; stroke: #2563eb; stroke-width: 1.4; }
+.s2   { fill: #dcf2e3; stroke: #2e9e5b; stroke-width: 1.4; }
+.box  { fill: #ffffff; stroke: #2563eb; stroke-width: 1.3; }
+.head { fill: #eaf2fb; stroke: #2563eb; stroke-width: 1.3; }
+.val  { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13.5px; fill: #1f3550; text-anchor: middle; dominant-baseline: central; }
+.idx  { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10px; fill: #2563eb; text-anchor: middle; dominant-baseline: central; }
+.lbl  { font-size: 13px; fill: #5b6b7f; text-anchor: middle; }
+.tag  { font-size: 13px; fill: #5b6b7f; }
+.code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; fill: #1b4b91; font-weight: 600; }
+.codec { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; fill: #1b4b91; font-weight: 600; text-anchor: middle; }
+.neg  { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; fill: #c2185b; text-anchor: middle; }
+.op   { font-size: 20px; fill: #1f3550; text-anchor: middle; dominant-baseline: central; }
+.axis { stroke: #1f3550; stroke-width: 1.2; fill: none; }
+.newax { stroke: #ff4d00; stroke-width: 2; fill: none; }
+.new  { fill: #ff4d00; font-weight: 700; }
+.flow { stroke: #2563eb; stroke-width: 1.6; fill: none; }
+.cut  { stroke: #c2185b; stroke-width: 2.2; fill: none; }
+.thin { stroke: #9db7d4; stroke-width: 1; fill: none; }
+</style>
+</defs><text class="codec" x="146.0" y="28">price</text><text class="lbl" x="40" y="59.5" style="font-size:12.5px">0</text><text class="lbl" x="40" y="89.5" style="font-size:12.5px">1</text><text class="lbl" x="40" y="119.5" style="font-size:12.5px">2</text><rect class="dim" x="80" y="40" width="62" height="30"/><text class="val" style="font-size:12.5px" x="111.0" y="55.0">Water</text><rect class="dim" x="80" y="70" width="62" height="30"/><text class="val" style="font-size:12.5px" x="111.0" y="85.0">Beer</text><rect class="dim" x="80" y="100" width="62" height="30"/><text class="val" style="font-size:12.5px" x="111.0" y="115.0">Wine</text><rect class="s0" x="142" y="40" width="70" height="30"/><text class="val" style="font-size:13.5px" x="177.0" y="55.0">1.0</text><rect class="s0" x="142" y="70" width="70" height="30"/><text class="val" style="font-size:13.5px" x="177.0" y="85.0">1.4</text><rect class="s0" x="142" y="100" width="70" height="30"/><text class="val" style="font-size:13.5px" x="177.0" y="115.0">5.0</text><path class="flow" d="M 40 160 L 40 140" marker-end="url(#b)"/><text class="lbl" x="40" y="176" style="font-size:12.5px">position</text><text class="lbl" x="40" y="192" style="font-size:12.5px">(.iloc)</text><path class="flow" d="M 111.0 160 L 111.0 140" marker-end="url(#b)"/><text class="lbl" x="111.0" y="176" style="font-size:12.5px">index</text><text class="lbl" x="111.0" y="192" style="font-size:12.5px">labels (.loc)</text><path class="flow" d="M 177.0 160 L 177.0 140" marker-end="url(#b)"/><text class="lbl" x="177.0" y="176" style="font-size:12.5px">values</text><text class="lbl" x="177.0" y="192" style="font-size:12.5px">float64</text></svg>

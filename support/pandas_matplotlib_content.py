@@ -37,7 +37,7 @@ LOC_ILOC = {
         ["**Selects by**", "**Label**: the names in the index you gave (`'mon'`, `'a'`, ...)", "**Position**: `0, 1, 2, ...`, as in a list or an array"],
         ["**Single element**", "`s.loc['b']`", "`s.iloc[1]`"],
         ["**Slice**", "`s.loc['b':'c']`: stop **included**", "`s.iloc[1:3]`: stop **excluded**, as in Python"],
-        ["**Mask**", "`s.loc[s > 2]`", "`s.iloc[(s > 2).to_numpy()]`: a plain boolean array only"],
+        ["**Mask**", "`s.loc[s > 2]`", "`s.iloc[(s > 2).to_numpy()]`: a plain boolean array (pandas 3 also takes a boolean Series with an integer index)"],
         ["**Fancy**", "`s.loc[['a', 'c']]`", "`s.iloc[[0, 2]]`"],
     ],
 }
@@ -64,6 +64,7 @@ PANDAS_2_VS_3 = {
         ["**Chained assignment**", "Sometimes worked, often with a `SettingWithCopyWarning`", "Never modifies the original (`ChainedAssignmentError` warning)", "`df['Price']['b'] = 99`: write `df.loc['b', 'Price'] = 99` instead"],
         ["**Float into an int column**", "The column silently becomes `float64`", "`TypeError`: create the column as float", "`df.loc[0, 'n'] = 1.5` on an `int64` column"],
         ["**Integer key, text index**", "`s[0]` falls back to the first **position** (with a warning)", "`s[0]` is always a **label**: `KeyError`", "Write `s.iloc[0]`"],
+        ["**Boolean Series in `.iloc`**", "Never: `NotImplementedError` (or `ValueError` with a text index)", "Accepted if its index is made of integers, matched by label", "`s.iloc[s > 2]` on the default index `0, 1, 2, ...`; `s.iloc[(s > 2).to_numpy()]` works in both"],
         ["**Datetime resolution**", "Always nanoseconds", "Inferred from the data (seconds ... nanoseconds)", "`pd.to_datetime(['2026-10-01']).dtype`: `datetime64[ns]` vs `datetime64[us]`"],
         ["**Categorical `groupby`**", "`observed=False`: every category, even the empty ones", "`observed=True`: only the categories present in the data", "Categories `a`, `b`, data only `a`: groups `a, b` vs `a`"],
         ["**Removed functions**", "Deprecated, still working", "Removed", "`fillna(method='ffill')` → `ffill()`, `applymap` → `map`, `freq='H'` → `'h'`"],

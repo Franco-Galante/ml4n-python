@@ -56,7 +56,8 @@ jobs:
         run: npm run --prefix edtrace/frontend build
 
       # The build copies the viewer's public/ folder, where var/ and images/ are
-      # symlinks: replace them with real copies of the traces and images only.
+      # symlinks: replace them with real copies of the traces, of the plots the
+      # lectures draw at run time (var/plots/, Matplotlib) and of the images.
       # When you step, the viewer rewrites the address to /<repo>?trace=... (no
       # trailing slash), so relative image paths would resolve against the site
       # root: a <base> tag pins them to the repo folder.
@@ -65,6 +66,7 @@ jobs:
           rm -rf _site/var _site/images
           mkdir -p _site/var
           cp -r var/traces _site/var/traces
+          if [ -d var/plots ]; then cp -r var/plots _site/var/plots; fi
           cp -r images _site/images
           sed -i 's#<head>#<head>\n    <base href="/${{ github.event.repository.name }}/" />#' _site/index.html
           touch _site/.nojekyll
